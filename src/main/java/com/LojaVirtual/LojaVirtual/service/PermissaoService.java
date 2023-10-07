@@ -46,7 +46,7 @@ public class PermissaoService {
         permissaoRepository.delete(permissao);
     }
 
-    public Page<Permissao> buscaTodosPaginado(GenericFilter filter, Pageable pageable) {
+    public Page<Permissao> buscaTodosPaginado(Pageable pageable) {
         return permissaoRepository.findAll(pageable);
     }
 
