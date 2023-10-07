@@ -6,12 +6,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.LojaVirtual.LojaVirtual.entity.Estado;
 import com.LojaVirtual.LojaVirtual.repository.EstadoRepository;
+
+import jakarta.servlet.GenericFilter;
 @Service
-public class EstadoService {
+public class EstadoService extends GenericService<Estado> {
 
     @Autowired
     private EstadoRepository estadoRepository;
@@ -39,6 +43,11 @@ public class EstadoService {
         Estado estado = estadoRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estado não encontrado."));
         estadoRepository.delete(estado);
+    }
 
+    public Page<Estado> buscaTodosPaginado(Pageable pageable){
+        
+
+        return estadoRepository.findAll(pageable);
     }
 }

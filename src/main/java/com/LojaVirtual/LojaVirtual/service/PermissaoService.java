@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.LojaVirtual.LojaVirtual.entity.Permissao;
+import com.LojaVirtual.LojaVirtual.entity.Pessoa;
 import com.LojaVirtual.LojaVirtual.repository.PermissaoRepository;
+
+import jakarta.servlet.GenericFilter;
 
 @Service
 public class PermissaoService {
@@ -39,6 +44,11 @@ public class PermissaoService {
         Permissao permissao = permissaoRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Permissao não encontrada."));
         permissaoRepository.delete(permissao);
-
     }
+
+    public Page<Permissao> buscaTodosPaginado(GenericFilter filter, Pageable pageable) {
+        return permissaoRepository.findAll(pageable);
+    }
+
+
 }

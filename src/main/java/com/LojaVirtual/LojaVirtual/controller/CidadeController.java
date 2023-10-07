@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.LojaVirtual.LojaVirtual.entity.Cidade;
@@ -21,12 +22,11 @@ import com.LojaVirtual.LojaVirtual.entity.Cidade;
 import com.LojaVirtual.LojaVirtual.service.CidadeService;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/api/cidade")
 @CrossOrigin
-public class CidadeController {
+public class CidadeController extends GenericController<Cidade> {
 
     @Autowired
     private CidadeService cidadeService;
@@ -61,4 +61,5 @@ public class CidadeController {
         return ResponseEntity.ok(cidadeService.buscarPorId(id));
     }
 
+    
 }

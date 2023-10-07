@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.LojaVirtual.LojaVirtual.entity.Pessoa;
 import com.LojaVirtual.LojaVirtual.repository.PessoaRepository;
+
+import jakarta.servlet.GenericFilter;
 
 @Service
 public class PessoaService {
@@ -39,6 +43,9 @@ public class PessoaService {
         Pessoa pessoa = pessoaRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pessoa não encontrado."));
         pessoaRepository.delete(pessoa);
+    }
 
+    public Page<Pessoa> buscaTodosPaginado(GenericFilter filter, Pageable pageable) {
+        return pessoaRepository.findAll(pageable);
     }
 }

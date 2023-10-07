@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.LojaVirtual.LojaVirtual.entity.Estado;
 import com.LojaVirtual.LojaVirtual.entity.Marca;
 import com.LojaVirtual.LojaVirtual.repository.MarcaRepository;
 
@@ -42,5 +45,10 @@ public class MarcaService {
                 .orElseThrow(() -> new NoSuchElementException("Marca não encontrada."));
         marcaRepository.delete(marca);
 
+    }
+
+     public Page<Marca> buscaTodosPaginado(Pageable pageable){
+    
+        return marcaRepository.findAll(pageable);
     }
 }
